@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Elevanta{% endblock %} · AI Business Analyst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    {% block nav %}
+    <nav class="top-nav">
+        <a class="brand" href="/chart">Elevanta</a>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('dashboard') }}" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+            <li><a href="/chart" class="{% if active_page == 'chart' %}active{% endif %}">Chart</a></li>
+            <li><a href="/graph" class="{% if active_page == 'graph' %}active{% endif %}">Graph</a></li>
+            <li><a href="/ideas" class="{% if active_page == 'ideas' %}active{% endif %}">Ideas</a></li>
+            <li><a href="/ask" class="{% if active_page == 'ask' %}active{% endif %}">Ask</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

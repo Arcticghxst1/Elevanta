@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Solutions{% endblock %}
+{% block content %}
+<main class="page">
+    <header class="page-header">
+        <p class="eyebrow">Profit alert</p>
+        <h1>Suggested solutions</h1>
+        <p>Use your saved profit data to identify practical ways to improve performance.</p>
+    </header>
+
+    {% if alert %}
+    <div class="alert alert-warning">Your profit data shows a steady decline. A tailored recommendation is shown below.</div>
+    {% elif graph_data %}
+    <div class="alert alert-success">Your profit data is not steadily decreasing.</div>
+    {% endif %}
+
+    <section class="card">
+        {% if answer %}
+        <pre class="answer visible">{{ answer }}</pre>
+        {% else %}
+        <p class="alert alert-info">No profit data is available yet. Add records from the chart page to get suggestions.</p>
+        {% endif %}
+        <div class="actions">
+            <a class="btn btn-primary" href="{{ url_for('chart') }}">Add profit data</a>
+            <a class="btn btn-outline" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
