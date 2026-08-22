@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Graph{% endblock %}
+{% block content %}
+<main class="page">
+    <header class="page-header">
+        <h1>Profit graph</h1>
+        <p>Check whether profit is steadily falling and get advice when it is.</p>
+    </header>
+
+    {% if alert %}
+    <div class="alert alert-warning">Profit margins are steadily falling. Advice is shown below.</div>
+    {% endif %}
+
+    <section class="card">
+        <h2>Summary</h2>
+        <form method="post">
+            <div class="input-group">
+                <label for="business">Business</label>
+                <input type="text" id="business" name="business" placeholder="Business name" value="{{ business }}">
+            </div>
+            {% if saved_count %}
+            <p class="alert alert-info">Using {{ saved_count }} saved profit record{% if saved_count != 1 %}s{% endif %} from your chart.</p>
+            {% else %}
+            <p class="alert alert-info">No saved profit data was found. Add records on the chart page first.</p>
+            {% endif %}
+            <div class="actions">
+                <button type="submit" class="btn btn-primary" {% if not saved_count %}disabled{% endif %}>Check profit trend</button>
+            </div>
+        </form>
+        {% if answer %}
+        <pre class="answer visible">{{ answer }}</pre>
+        {% endif %}
+        {% if graph_data and not alert and not answer %}
+        <p class="alert alert-success">No steady decline detected in the latest figures.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

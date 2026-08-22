@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Project Ideas{% endblock %}
+{% block content %}
+<main class="page">
+    <header class="page-header">
+        <h1>Project ideas</h1>
+        <p>Generate tailored ideas using your saved monthly income data.</p>
+    </header>
+
+    <section class="card">
+        <form method="post">
+            <div class="input-group">
+                <label for="business">Business</label>
+                <input type="text" id="business" name="business" placeholder="Business name" value="{{ business or '' }}">
+            </div>
+            {% if saved_count %}
+            <p class="alert alert-info">Using {{ saved_count }} saved chart record{% if saved_count != 1 %}s{% endif %}, grouped by month.</p>
+            {% else %}
+            <p class="alert alert-info">No saved chart data was found. Add profit records first.</p>
+            {% endif %}
+            <div class="actions">
+                <button type="submit" class="btn btn-primary" {% if not saved_count %}disabled{% endif %}>Generate ideas</button>
+            </div>
+        </form>
+        {% if answer %}
+        <pre class="answer visible">{{ answer }}</pre>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}
